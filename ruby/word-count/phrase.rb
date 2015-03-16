@@ -4,13 +4,9 @@ class Phrase
   end
 
   def word_count
-    words = {}
+    words = Hash.new(0)
 
     extract_words.each do |word|
-      unless words.has_key?(word)
-        words[word] = 0
-      end
-
       words[word] += 1
     end
 
