@@ -6,10 +6,11 @@ class Series
   def slices(how_many)
     assert_sane_input(@series, how_many)
     slices = []
-    @series.each_with_index() do |number, index|
-      break if @series.length - index < how_many
+
+    (0..@series.length - how_many).each do |index|
       slices << @series[index...index + how_many]
     end
+
     slices
   end
 
