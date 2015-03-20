@@ -1,12 +1,8 @@
 class ETL
   def self.transform(old)
-    new_version = {}
 
-    old.each do |score, chars|
-      chars.map!(&:downcase)
-      chars.each { |char| new_version[char] = score }
+    old.each_with_object({}) do |(score, chars), new_version|
+      chars.each { |char| new_version[char.downcase] = score }
     end
-
-    new_version
   end
 end
