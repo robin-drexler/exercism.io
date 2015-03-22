@@ -14,24 +14,10 @@ class Anagram
     candidate = candidate.downcase
     word = word.downcase
 
-    unless candidate.length == word.length
-      return false
-    end
-
     if word == candidate
       return false
     end
 
-    chars_in_same_frequenzy?(candidate, word)
-  end
-
-  def chars_in_same_frequenzy?(word, another_word)
-    unique_chars_in_word = word.each_char.to_a.uniq
-
-    unique_chars_in_word.all? do |char|
-      regex = /#{char}/
-
-      another_word.scan(regex).length == word.scan(regex).length
-    end
+    word.each_char.sort == candidate.each_char.sort
   end
 end
