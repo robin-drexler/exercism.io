@@ -9,11 +9,7 @@ class Crypto
   end
 
   def plaintext_segments
-    normalize_plaintext
-      .chars
-      .each_slice(size)
-      .to_a
-      .map { |word_array| word_array.join('')}
+    normalize_plaintext.scan(/.{1,#{size}}/)
   end
 
   def ciphertext
@@ -25,10 +21,7 @@ class Crypto
   end
 
   def normalize_ciphertext
-    how_many = size - 1
-    how_many = how_many >= 2 ? how_many : 2
-
-    ciphertext.gsub(/(\w{#{how_many}})(?!$)/, "\\1 ")
+    ciphertext.gsub(/(\w{#{plaintext_segments.length}})(?!$)/, "\\1 ")
   end
 
   def size
